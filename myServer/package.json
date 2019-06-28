@@ -1,0 +1,35 @@
+{
+  "name": "myserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node server/app.ts",
+    "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
+    "watch:serve": "ts-node server/app.ts"
+  },
+  "author": "babel ",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.5",
+    "@types/graphql": "^14.2.1",
+    "@types/mongoose": "^5.5.6",
+    "apollo-server": "^2.6.4",
+    "apollo-server-koa": "^2.6.4",
+    "config": "^3.1.0",
+    "graphql": "^14.3.1",
+    "graphql-toolkit": "^0.2.14",
+    "koa": "^2.7.0",
+    "mongoose": "^5.6.0",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "type-graphql": "^0.17.4",
+    "typegoose": "^5.7.2"
+  }
+}
