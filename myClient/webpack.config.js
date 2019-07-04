@@ -6,7 +6,7 @@ let MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports={
     mode:'development',
-    devtool:'cheap-module-source-map',
+    devtool:'eval-source-map',
     entry:['react-hot-loader/patch','babel-polyfill','./src/index.js'],
     // 构建出用于 Electron 渲染进程用的 JavaScript 代码，也就是这2个窗口需要的代码
     target: 'electron-renderer',
@@ -82,7 +82,7 @@ module.exports={
                     'less-loader' //less => css
                 ]
             },
-    
+
             {
                 test:/\.js$/,
                 exclude:/node_modules/,
@@ -97,7 +97,8 @@ module.exports={
                             ["@babel/plugin-proposal-decorators", { "legacy": true }],
                             ["@babel/plugin-proposal-class-properties", { "loose" : true }],
                             '@babel/plugin-transform-runtime',
-                            "react-hot-loader/babel"
+                            "react-hot-loader/babel",
+                            "dynamic-import-webpack"
                         ]
                     }
                 },
@@ -105,7 +106,7 @@ module.exports={
             }
         ]
     },
-    
+
     resolve:{
         extensions:['.js']
     },

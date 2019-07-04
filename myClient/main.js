@@ -1,4 +1,4 @@
-const {app,BrowserWindow} = require('electron') // 加载electron
+const {app,BrowserWindow,electron,Menu} = require('electron') // 加载electron
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -6,15 +6,19 @@ let win
 function createWindow (){
     //创建浏览器窗口
     win = new BrowserWindow({
-        width:800,
-        height:600,
+        title: '小思念',
+        width:950,
+        height:650,
         webPreferences:{
             nodeIntegration:true
-        }
+        },
+        resizable: false,
+        frame: false//去除边框，需要自定义哪些部分可以拖动，需要拖动的部分增加-webkit-app-region: drag即可
     })
 
     win.loadURL(`file://${__dirname}/build/index.html`)
-
+    // 隐藏菜单栏
+    Menu.setApplicationMenu(null)
     //打开开发者工具
     win.webContents.openDevTools()
 
@@ -39,7 +43,7 @@ app.on('window-all-closed', () => {
       app.quit()
     }
   })
-  
+
   app.on('activate', () => {
     // 在macOS上，当单击dock图标并且没有其他窗口打开时，
     // 通常在应用程序中重新创建一个窗口。
@@ -47,6 +51,6 @@ app.on('window-all-closed', () => {
       createWindow()
     }
   })
-  
+
   // 在这个文件中，你可以续写应用剩下主进程代码。
   // 也可以拆分成几个文件，然后用 require 导入。

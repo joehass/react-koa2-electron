@@ -1,39 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link,Redirect} from "react-router-dom";
+import {IndexRoute} from 'react-router'
 // mobx和react-router整合
-import {syncHistoryWithStore} from 'mobx-react-router';
-import Hot from '../components/hot'
-import Forword from '../components/forword'
-import Recommend from '../components/recommend'
+import {syncHistoryWithStore,useRouterHistory} from 'mobx-react-router';
+import {asyncComponent} from './AsyncComponent'
 
+import Main from '../components/main/index'
+import Login from "../components/login/Login";
 
 class AppRouter extends React.Component{
 
     render(){
         return(
-                //定义路由
-            <Router>
             <div>
-                <nav>
-                    <li>
-                        <Link to='/'>基础</Link>
-                    </li>
-                    <li>
-                        <Link to='/hot'>热榜</Link>
-                    </li>
-                    <li>
-                        <Link to='/forword'>其他</Link>
-                    </li>
-                </nav>
-                <br/>
-                <br/>
-                <br/>
-            <Route path='/' exact component={Recommend} />
-            <Route path='/hot' exact component={Hot} />
-            <Route path='/forword' exact component={Forword} />
+                <Router>
+                    <Route path='/' component={Main}/>
+                    <Route path='/login' component={Login}/>
+                </Router>
             </div>
-        </Router>    
-    )}
+        )}
 }
 
 export default AppRouter;
