@@ -16,7 +16,7 @@
     "esModuleInterop":true,
   },
   "include":[
-    "./server/**/*", "test"
+    "./server/**/*", "server/test"
   ],
   "exclude":[
     "build",

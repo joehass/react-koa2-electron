@@ -10,48 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typegoose_1 = require("typegoose");
-const type_graphql_1 = require("type-graphql");
-const mongodb_1 = require("mongodb");
-let User = class User extends typegoose_1.Typegoose {
-};
-__decorate([
-    type_graphql_1.Field(type => type_graphql_1.ID),
-    __metadata("design:type", mongodb_1.ObjectId)
-], User.prototype, "_id", void 0);
+class User extends typegoose_1.Typegoose {
+}
 __decorate([
     typegoose_1.prop({ required: true }) // 标识mongosse
-    ,
-    type_graphql_1.Field({ nullable: true }) //标识graphql
     ,
     __metadata("design:type", String)
 ], User.prototype, "userName", void 0);
 __decorate([
     typegoose_1.prop({ required: true }),
-    type_graphql_1.Field(),
     __metadata("design:type", String)
 ], User.prototype, "sex", void 0);
 __decorate([
     typegoose_1.prop(),
-    type_graphql_1.Field(),
     __metadata("design:type", Number)
 ], User.prototype, "telephone", void 0);
 __decorate([
     typegoose_1.prop(),
-    type_graphql_1.Field(),
     __metadata("design:type", Number)
 ], User.prototype, "Intimacy", void 0);
 __decorate([
     typegoose_1.prop(),
-    type_graphql_1.Field(),
     __metadata("design:type", String)
 ], User.prototype, "userAccount", void 0);
 __decorate([
     typegoose_1.prop(),
-    type_graphql_1.Field(),
     __metadata("design:type", String)
 ], User.prototype, "userPassword", void 0);
-User = __decorate([
-    type_graphql_1.ObjectType()
-], User);
+exports.User = User;
 exports.default = new User().getModelForClass(User); //将该对象导出为mongoose可使用的scheme
 //# sourceMappingURL=useEntity.js.map
