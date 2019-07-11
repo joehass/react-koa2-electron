@@ -1,15 +1,6 @@
-// 导入mobx路由store
-import {RouterStore} from 'mobx-react-router';
-import {useStrict} from 'mobx';
+//这里存放unStated所有的Conter
 
-//开启严格模式
+export default function useAppStore(){
 
-
-class AppStore{
-
-    constructor(){
-        this.routerStore = new RouterStore();
-    }
 }
 
-export default AppStore

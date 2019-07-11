@@ -7,11 +7,12 @@ import './style/index'//引入样式
 import {LocaleProvider} from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 // 导入mobx组件
-import {Provider} from 'mobx-react'
+import { Provider, Subscribe, Container } from 'unstated';
+import useAppStore from './store/index.js'
 
 export function App(){
 
-        const appStore = new AppStore();
+        const appStore = useAppStore();
         return(
             <Provider {...appStore}>
                 <AppRouter/>

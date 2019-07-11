@@ -6,7 +6,7 @@ import {PersonAdd,Lock} from "@material-ui/icons";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import HttpUtil from '../../util/MyQuery'
+import HttpUtil from '../util/Http'
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";

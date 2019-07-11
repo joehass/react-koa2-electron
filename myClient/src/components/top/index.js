@@ -37,7 +37,6 @@ export default function Top(){
         setRegisaterVisible(!regisaterVisible)
     }
     function onRegisterClose(){
-
         setRegisaterVisible(!regisaterVisible)
         
     }
