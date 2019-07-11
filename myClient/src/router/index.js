@@ -10,7 +10,7 @@ import Login from "../components/login/Login";
 
 function AppRouter(){
 
-    render(){
+
         return(
             <div>
                 <Router>
@@ -19,6 +19,5 @@ function AppRouter(){
                 </Router>
             </div>
         )}
-}
 
 export default AppRouter;

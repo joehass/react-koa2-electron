@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,64 +12,51 @@ import Login from "../login/Login";
 import Register from "../login/Register";
 import HttpUtil from "../../util/Http";
 
-export default class Top extends React.Component{
+export default function Top(){
 
-    state = {
-        open:false,
-        loginVisible:false,
-        regisaterVisible:false
-    };
+    const [open, setOpen] = useState(false)
+    const [loginVisible, setLoginVisible] = useState(false)
+    const [regisaterVisible, setRegisaterVisible] = useState(false)
 
-     handleMenu = ()=>{
-        this.setState({
-            open: !this.state.open
-        })
+    function handleMenu(){
+        setOpen(!open)
      };
 
-     handleClose = ()=>{
-        this.setState({
-            open:false
-        })
+     function handleClose(){
+        setOpen(false)
      };
 
-    loginShow = ()=>{
+     function loginShow (){
         const httpUtil = new HttpUtil();
         httpUtil.getRequest();
-       this.setState({
-           loginVisible:!this.state.loginVisible
-       })
+        setLoginVisible(!loginVisible)
     };
 
-    onRegister = () =>{
-        this.loginShow();
-        this.setState({
-            regisaterVisible:!this.state.regisaterVisible
-        })
+    function onRegister (){
+        loginShow();
+        setRegisaterVisible(!regisaterVisible)
     }
-    onRegisterClose = ()=>{
-        this.setState({
-            regisaterVisible:!this.state.regisaterVisible
-        })
+    function onRegisterClose(){
+
+        setRegisaterVisible(!regisaterVisible)
+        
     }
 
-    closeLogin = () =>{
-        this.setState({
-            loginVisible:!this.state.loginVisible
-        })
+    function closeLogin(){
+        setLoginVisible(!loginVisible)
     };
 
-    render(){
         return (
             <div>
                 <AppBar position="static">
                     {/*toolbar 子元素同行显示*/}
                     <Toolbar>
-                        <Button color="inherit" onClick={this.loginShow.bind(this)} className="login-button">点击登录</Button>
+                        <Button color="inherit" onClick={loginShow} className="login-button">点击登录</Button>
                         <IconButton
                             //aria-label="Account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={this.handleMenu.bind(this)}
+                            onClick={handleMenu}
                             color="inherit"
                         >
                             <Settings/>
@@ -101,31 +89,30 @@ export default class Top extends React.Component{
                                 vertical: 'bottom',//设置x轴center
                                 horizontal: 'right'//设置y轴
                             }}
-                            open={this.state.open}
-                            onClose={this.handleClose.bind(this)}
+                            open={open}
+                            onClose={handleClose}
                         >
-                            <MenuItem onClick={this.handleClose.bind(this)}><PersonAdd/>退出登录</MenuItem>
-                            <MenuItem onClick={this.handleClose.bind(this)}>退出软件</MenuItem>
+                            <MenuItem onClick={handleClose}><PersonAdd/>退出登录</MenuItem>
+                            <MenuItem onClick={handleClose}>退出软件</MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
 
                 {
-                    this.state.loginVisible ?
+                    loginVisible ?
                         <Login
-                            visibled={this.state.loginVisible}
-                            onClose = {this.closeLogin.bind(this)}
-                            onRister = {this.onRegister.bind(this)}
+                            visibled={loginVisible}
+                            onClose = {closeLogin}
+                            onRister = {onRegister}
                         />:null
                 }
                 {
-                    this.state.regisaterVisible?
+                    regisaterVisible?
                         <Register
-                            visibled={this.state.regisaterVisible}
-                            onClose = {this.onRegisterClose.bind(this)}
+                            visibled={regisaterVisible}
+                            onClose = {onRegisterClose}
                         />:null
                 }
             </div>
         )
     }
-}
