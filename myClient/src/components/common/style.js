@@ -1,14 +1,27 @@
-//全局样式
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-export const FormItemLayout={
-    labelCol: {
-        xs: {span: 24},
-        sm: {span: 5}
+//表单统一样式
+const formStyle = makeStyles(theme => ({
+    button: {
+        margin: theme.spacing(1),
     },
-    wrapperCol: {
-        xs: {span: 24},
-        sm: {span: 12},
-        md: {span: 14}//10
+    textField: {//不带图标的输入框
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 320,
+    },
+    dense: {
+        marginTop: 19,
+    },
+    margin: {
+        margin: theme.spacing(1),
+    },
+    textFieldWithIcon:{//带图标的输入框
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 272,
     }
-}
+}));
+
+export default formStyle;
 

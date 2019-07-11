@@ -8,7 +8,7 @@ import {useStrict} from 'mobx';
 class AppStore{
 
     constructor(){
-        this.touterStore = new RouterStore();
+        this.routerStore = new RouterStore();
     }
 }
 

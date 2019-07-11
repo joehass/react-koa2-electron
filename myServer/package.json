@@ -24,6 +24,9 @@
     "apollo-server": "^2.6.4",
     "apollo-server-koa": "^2.6.4",
     "config": "^3.1.0",
+    "core-decorators": "^0.20.0",
+    "egg": "^2.22.2",
+    "egg-bin": "^4.13.0",
     "graphql": "^14.4.2",
     "graphql-toolkit": "^0.2.14",
     "koa": "^2.7.0",
@@ -35,6 +38,7 @@
     "mongoose": "^5.6.0",
     "nodemon": "^1.19.1",
     "react-apollo": "^2.5.8",
+    "redis": "^2.8.0",
     "ts-node": "^8.3.0",
     "type-graphql": "^0.17.4",
     "typegoose": "^5.7.2"

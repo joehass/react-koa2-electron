@@ -12,37 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const useEntity_1 = __importDefault(require("../models/useEntity"));
+const R_1 = __importDefault(require("../models/R"));
+const databaseHelper_1 = __importDefault(require("./../util/databaseHelper"));
 class UserService {
     constructor() {
-        this.model = useEntity_1.default;
-    }
-    //Partial<User>是一个{}对象
-    find(selector) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.model.find(selector);
+        //TODO:注册相关逻辑
+        this.register = (user) => __awaiter(this, void 0, void 0, function* () {
+            let Intimacy = this.generatorIntimacy();
+            user.intimacy = Intimacy;
+            const u = new useEntity_1.default(user);
+            let r = new R_1.default();
+            yield databaseHelper_1.default.save(u, function (msg) {
+                if (msg == 0) { //插入成功
+                    return r.data(user);
+                }
+                else {
+                    return r.error(msg);
+                }
+            });
         });
     }
-    findOneById(_id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.model.findOne({ _id });
-        });
-    }
-    remove(_id, String) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let entityToRemove = yield this.model.findOne(_id);
-            yield this.model.remove(entityToRemove);
-        });
-    }
-    count(entity) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.model.count(entity);
-        });
-    }
-    createUser(user) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const u = new this.model(user);
-            u.save();
-        });
+    //TODO:生成亲密号,一串8位随机数
+    generatorIntimacy() {
+        let ran = '';
+        for (let i = 0; i < 9; i++) {
+            ran += Math.floor(Math.random() * 10) + '';
+        }
+        return ran;
     }
 }
 exports.UserService = UserService;

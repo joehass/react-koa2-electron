@@ -94,7 +94,7 @@ module.exports={
                             '@babel/preset-react'//解析react语法
                         ],
                         plugins:[//这里配置小插件
-                            ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                            ["@babel/plugin-proposal-decorators", { "legacy": true }],//解析装饰器
                             ["@babel/plugin-proposal-class-properties", { "loose" : true }],
                             '@babel/plugin-transform-runtime',
                             "react-hot-loader/babel",

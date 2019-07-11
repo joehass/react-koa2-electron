@@ -11,7 +11,7 @@ import {Provider} from 'mobx-react'
 
 export default class App extends React.Component{
     render(){
-       const appStore = new AppStore
+        const appStore = new AppStore();
 
         return(
             <Provider {...appStore}>

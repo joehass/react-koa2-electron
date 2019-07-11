@@ -9,9 +9,14 @@ const index_1 = require("./router/index");
 const router = require('koa-router')();
 const koa2_cors_1 = __importDefault(require("koa2-cors"));
 var bodyParser = require('koa-bodyparser');
+const Context_1 = __importDefault(require("./middleware/Context"));
+const RedisHelper_1 = __importDefault(require("./util/RedisHelper"));
+const con = new Context_1.default();
 const app = new koa_1.default();
 const database = new database_1.default();
 database.startConnection();
+const redisHelper = new RedisHelper_1.default();
+redisHelper.createClient();
 //设置跨域
 app.use(koa2_cors_1.default({
     origin: function (ctx) {
@@ -24,6 +29,7 @@ app.use(koa2_cors_1.default({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 app.use(bodyParser()); //解析post请求传过来的参数
+// app.use(con.saveContext)
 //启动路由
 app.use(index_1.UserRouter.routes())
     .use(index_1.UserRouter.allowedMethods());

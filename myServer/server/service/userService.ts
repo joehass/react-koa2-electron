@@ -1,34 +1,32 @@
 import { ModelType } from 'typegoose'
-import UserModel,{User} from '../models/useEntity'
+import User from '../models/useEntity'
+import R from "../models/R"
+import databaseHelper from './../util/databaseHelper';
 
 export class UserService{
-    private readonly model:ModelType<User>//创建一个modelclass对象，等同于 new User().getModelForClass(User)
 
-    constructor(){
-        this.model = UserModel
+    //TODO:注册相关逻辑
+     register = async(user:any)=>{
+        let Intimacy = this.generatorIntimacy()
+        user.intimacy = Intimacy
+        
+        const u = new User(user)
+        let r = new R()
+        await databaseHelper.save(u,function(msg){
+            if(msg == 0){//插入成功
+               return r.data(user)
+            }else{
+                return r.error(msg)
+            }
+        })
     }
 
-    //Partial<User>是一个{}对象
-    async find(selector?:Partial<User>){
-        return this.model.find(selector)
-    }
-
-    async findOneById(_id: String){
-        return this.model.findOne({_id})
-    }
-
-    async remove(_id,String){
-        let entityToRemove = await this.model.findOne(_id)
-        await this.model.remove(entityToRemove)
-
-    }
-
-    async count(entity:any){
-        return this.model.count(entity)
-    }
-
-    async createUser(user:User){
-        const u = new this.model(user)
-        u.save();
+    //TODO:生成亲密号,一串8位随机数
+    generatorIntimacy(){
+        let ran:string = ''
+        for(let i = 0; i < 9; i++){
+            ran += Math.floor(Math.random()*10)+''
+        }
+        return ran;
     }
 }

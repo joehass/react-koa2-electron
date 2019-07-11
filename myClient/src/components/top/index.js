@@ -8,12 +8,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import Button from "@material-ui/core/Button";
 import Login from "../login/Login";
+import Register from "../login/Register";
+import HttpUtil from "../../util/Http";
 
 export default class Top extends React.Component{
 
     state = {
         open:false,
-        loginVisible:false
+        loginVisible:false,
+        regisaterVisible:false
     };
 
      handleMenu = ()=>{
@@ -29,10 +32,24 @@ export default class Top extends React.Component{
      };
 
     loginShow = ()=>{
+        const httpUtil = new HttpUtil();
+        httpUtil.getRequest();
        this.setState({
            loginVisible:!this.state.loginVisible
        })
     };
+
+    onRegister = () =>{
+        this.loginShow();
+        this.setState({
+            regisaterVisible:!this.state.regisaterVisible
+        })
+    }
+    onRegisterClose = ()=>{
+        this.setState({
+            regisaterVisible:!this.state.regisaterVisible
+        })
+    }
 
     closeLogin = () =>{
         this.setState({
@@ -98,6 +115,14 @@ export default class Top extends React.Component{
                         <Login
                             visibled={this.state.loginVisible}
                             onClose = {this.closeLogin.bind(this)}
+                            onRister = {this.onRegister.bind(this)}
+                        />:null
+                }
+                {
+                    this.state.regisaterVisible?
+                        <Register
+                            visibled={this.state.regisaterVisible}
+                            onClose = {this.onRegisterClose.bind(this)}
                         />:null
                 }
             </div>

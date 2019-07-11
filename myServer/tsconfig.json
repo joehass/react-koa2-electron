@@ -7,7 +7,7 @@
     "outDir": "./build",
     "noFallthroughCasesInSwitch": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true,//启动装饰器特性
     "allowJs": false,
     "sourceMap": true,
     "rootDir":"./server",  
@@ -16,7 +16,7 @@
     "esModuleInterop":true,
   },
   "include":[
-    "./server/**/*", "server/test"
+    "./server"
   ],
   "exclude":[
     "build",

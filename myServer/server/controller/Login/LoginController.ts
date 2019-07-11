@@ -1,20 +1,24 @@
 
+import {UserService} from '../../service/userService'
+import User  from '../../models/useEntity';
+import { bindContext } from '../../decorator/decorator';
+
 class LoginController {
     
-    static async register(ctx){
-        console.log(ctx.data)
-        const books = [
-            {
-              title: 'Harry Potter and the Chamber of Secrets',
-              author: 'J.K. Rowling',
-            },
-            {
-              title: 'Jurassic Park',
-              author: 'Michael Crichton',
-            },
-          ];
-        ctx.body = books;
+    private readonly userService:UserService
+
+    constructor(){
+        this.userService = new UserService()
+    }
+
+  // @bindContext(User)
+     register = async(ctx)=>{
+        let data = ctx.request.body
+        let res
+        res = await this.userService.register(data)
+        
+        ctx.body = res
     }
 }
 
-export default LoginController
+export default new LoginController()

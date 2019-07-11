@@ -28,7 +28,7 @@ __decorate([
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", Number)
-], User.prototype, "Intimacy", void 0);
+], User.prototype, "intimacy", void 0);
 __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
@@ -37,6 +37,5 @@ __decorate([
     typegoose_1.prop(),
     __metadata("design:type", String)
 ], User.prototype, "userPassword", void 0);
-exports.User = User;
 exports.default = new User().getModelForClass(User); //将该对象导出为mongoose可使用的scheme
 //# sourceMappingURL=useEntity.js.map

@@ -8,7 +8,7 @@ import {asyncComponent} from './AsyncComponent'
 import Main from '../components/main/index'
 import Login from "../components/login/Login";
 
-class AppRouter extends React.Component{
+function AppRouter(){
 
     render(){
         return(

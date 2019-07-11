@@ -1,3 +1,5 @@
+import {SUCCESS__MSG,FAUILD__MSG} from '../config/const'
+
 class DatabaseHelper{
 
     find = async(model,value) =>{
@@ -5,8 +7,21 @@ class DatabaseHelper{
         return value1
     }
 
-    save = (model) =>{
-        model.save()
+    /**
+     * TODO:保存进入数据库
+     *
+     * @memberof DatabaseHelper
+     */
+    save = (model,callback) =>{
+        model.save(function(err){
+            if(err){
+                console.log('保存失败: '+ err)
+                callback(err)
+             }else{
+                console.log('保存成功')
+                callback(SUCCESS__MSG)
+            }
+        })
     }
 }
 const databaseHelper = new DatabaseHelper()

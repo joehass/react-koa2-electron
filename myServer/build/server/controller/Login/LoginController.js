@@ -11,18 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class LoginController {
     static register(ctx) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(ctx.data);
-            const books = [
-                {
-                    title: 'Harry Potter and the Chamber of Secrets',
-                    author: 'J.K. Rowling',
-                },
-                {
-                    title: 'Jurassic Park',
-                    author: 'Michael Crichton',
-                },
-            ];
-            ctx.body = books;
+            ctx.request.body;
         });
     }
 }

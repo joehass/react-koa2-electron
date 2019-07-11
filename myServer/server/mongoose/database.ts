@@ -16,6 +16,5 @@ export default class Database {
         dbStatus.once('open', function() {
             console.log('链接成功')
           });
-        
     }
 }

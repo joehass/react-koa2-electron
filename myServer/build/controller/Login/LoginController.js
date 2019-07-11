@@ -8,23 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const userService_1 = require("../../service/userService");
 class LoginController {
-    static register(ctx) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log(ctx.data);
-            const books = [
-                {
-                    title: 'Harry Potter and the Chamber of Secrets',
-                    author: 'J.K. Rowling',
-                },
-                {
-                    title: 'Jurassic Park',
-                    author: 'Michael Crichton',
-                },
-            ];
-            ctx.body = books;
+    constructor() {
+        // @bindContext(User)
+        this.register = (ctx) => __awaiter(this, void 0, void 0, function* () {
+            let data = ctx.request.body;
+            let res;
+            res = yield this.userService.register(data);
+            ctx.body = res;
         });
+        this.userService = new userService_1.UserService();
     }
 }
-exports.default = LoginController;
+exports.default = new LoginController();
 //# sourceMappingURL=LoginController.js.map

@@ -1,5 +1,10 @@
 import {get} from 'config'
 
-export const MONGO_PORT = get('MONGO_PORT');
-export const DB_NAME = get('DB_NAME');
-export const MONGO_HOST = get('MONGO_HOST');
+export const MONGO_PORT = 27017
+export const DB_NAME = "enai"
+export const MONGO_HOST ="localhost"
+
+//成功
+export const SUCCESS__MSG=0;
+//失败
+export const FAUILD__MSG=1;

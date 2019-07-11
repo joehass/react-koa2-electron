@@ -5,28 +5,16 @@ import Typography from "@material-ui/core/Typography";
 // import {Settings,PersonAdd, Close,CropDin,Remove} from '@material-ui/icons';
 import Dialog from "../common/Dialog";
 import TextField from "@material-ui/core/TextField";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
-import Toolbar from "../top";
+import formStyle from "../common/style";
 
-const useStyles = makeStyles(theme => ({
-    button: {
-        margin: theme.spacing(1),
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 320,
-    },
-    dense: {
-        marginTop: 19,
-    }
-}));
+import axios from 'axios'
 
 export default (props) =>{
-    const classes = useStyles();
-    const {visibled,onClose} = props;
+    const classes = formStyle();
+    const {visibled,onClose,onRister} = props;
     const [open,setOpen] = useState(visibled);
+    const [registerOpen,setRegisterOpen] = useState(false);
     return (
         <div>
             <Dialog
@@ -64,23 +52,32 @@ export default (props) =>{
                     <Button variant="contained" type="submit" color="primary" className={classes.button}>
                         登录
                     </Button>
-                    <a style={{color:'rgba(0, 0, 0, 0.65)'}}>
-                    <Typography variant="overline" display="block" gutterBottom>
-                        没有账号？立即注册
-                    </Typography>
+                    <a style={{color:'rgba(0, 0, 0, 0.65)'}} onClick={registerShow}>
+                        <Typography variant="overline" display="block" gutterBottom>
+                            没有账号？立即注册
+                        </Typography>
                     </a>
                 </form>
             </div>
         )
     }
 
+    function registerShow(){
+        onRister();
+    }
+
     function closeLogin(){
-        setOpen(!{open});
+        setOpen(!open);
+        console.log(open);
         onClose()
     }
 
     function sub(value){
+        value.preventDefault();//阻止表单提交
         let user = value.target.user.value;
         let password = value.target.password.value;
+        axios.get("http://localhost:2222/login?aa=1").then(function (response) {
+            console.log(response)
+        })
     }
 }

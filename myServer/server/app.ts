@@ -6,10 +6,16 @@ import {UserRouter} from './router/index'
 const router = require('koa-router')()
 import cors from 'koa2-cors'
 var bodyParser = require('koa-bodyparser');
+import Context from './middleware/Context'
+import RedisHelper from './util/RedisHelper';
+
+const con = new Context()
 
 const app = new Koa();
 const database = new Database()
 database.startConnection();
+const redisHelper = new RedisHelper()
+redisHelper.createClient()
 
 //设置跨域
 app.use(cors({
@@ -24,6 +30,8 @@ app.use(cors({
 }))
 
 app.use(bodyParser())//解析post请求传过来的参数
+
+// app.use(con.saveContext)
 //启动路由
 app.use(UserRouter.routes())
     .use(UserRouter.allowedMethods())

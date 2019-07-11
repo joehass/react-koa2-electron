@@ -8,14 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const const_1 = require("../config/const");
 class DatabaseHelper {
     constructor() {
         this.find = (model, value) => __awaiter(this, void 0, void 0, function* () {
             const value1 = yield model.find(value);
             return value1;
         });
-        this.save = (model) => {
-            model.save();
+        /**
+         * TODO:保存进入数据库
+         *
+         * @memberof DatabaseHelper
+         */
+        this.save = (model, callback) => {
+            model.save(function (err) {
+                if (err) {
+                    console.log('保存失败: ' + err);
+                    callback(err);
+                }
+                else {
+                    console.log('保存成功');
+                    callback(const_1.SUCCESS__MSG);
+                }
+            });
         };
     }
 }
