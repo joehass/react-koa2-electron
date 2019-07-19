@@ -5,6 +5,6 @@ export const DB_NAME = "enai"
 export const MONGO_HOST ="localhost"
 
 //成功
-export const SUCCESS__MSG=0;
+export const SUCCESS__MSG=1;
 //失败
-export const FAUILD__MSG=1;
+export const FAUILD__MSG=0;

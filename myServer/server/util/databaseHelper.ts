@@ -12,15 +12,18 @@ class DatabaseHelper{
      *
      * @memberof DatabaseHelper
      */
-    save = (model,callback) =>{
-        model.save(function(err){
-            if(err){
-                console.log('保存失败: '+ err)
-                callback(err)
-             }else{
-                console.log('保存成功')
-                callback(SUCCESS__MSG)
-            }
+    save = (model) =>{
+        return new Promise(resolve=>{
+            model.save(function(err){
+                if(err){
+                    console.log('保存失败: '+ err)
+                    resolve(err)
+                 }else{
+                    console.log('保存成功')
+                    resolve(SUCCESS__MSG)
+                }
+            })
+    
         })
     }
 }

@@ -6,13 +6,16 @@ import {PersonAdd,Lock} from "@material-ui/icons";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import HttpUtil from '../util/Http'
+import HttpUtil from '../../util/Http'
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-const httpUtil = new HttpUtil();
+import {useStore} from '../../index.js'
+import { observer } from "mobx-react";
 
-export default (props)=>{
+
+export const Register =  observer(function(props){
+    const store = useStore("RegisterStore");
     const {visibled,onClose} = props;
     const [open,setOpen] = useState(visibled);
     const [value, setValue] = React.useState(1);
@@ -82,7 +85,7 @@ export default (props)=>{
                                       sm: 容器宽度
 
                                     */}
-                                    <Grid container spacing={1} md={100}>
+                                    <Grid container spacing={1}>
                                     <FormControlLabel
                                         value="0"
                                         control={<Radio color="primary" />}
@@ -119,21 +122,26 @@ export default (props)=>{
     }
 
 
-    function sub (value){
+    async function sub (value){
         value.preventDefault();//阻止表单提交
         let userName = value.target.userName.value;
         let userAccount = value.target.userAccount.value;
         let password = value.target.password1.value;
         let gender = value.target.gender.value;
-        const uri = '/register';
-        const body = {
+        const {registerAction} = store
+
+        let values = {
             userName:userName,
             userAccount:userAccount,
             password:password,
             sex:gender
-        };
-        httpUtil.postRequest(uri,body,function(res){
-            console.log(res)
-        })
+        }
+
+        await registerAction(values)
     }
-}
+
+    //TODO: 注册之后逻辑
+    function registerAfter(){
+        const {register} = store
+    }
+})

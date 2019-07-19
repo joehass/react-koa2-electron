@@ -48,7 +48,9 @@
     "mobx-logger": "^0.7.1",
     "mobx-react": "^6.1.1",
     "mobx-react-form": "^2.0.2",
+    "mobx-react-lite": "^1.4.1",
     "mobx-react-router": "^4.0.7",
+    "mobx-state-tree": "^3.14.0",
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
@@ -66,10 +68,11 @@
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2",
     "typing": "^0.1.9",
+    "unstated": "^2.1.1",
     "unstated-next": "^1.1.0",
     "url-loader": "^2.0.1",
     "webpack": "^4.35.0",
-    "webpack-cli": "^3.3.5",
+    "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
   }
 }

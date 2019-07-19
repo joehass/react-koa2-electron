@@ -8,14 +8,11 @@ import cors from 'koa2-cors'
 var bodyParser = require('koa-bodyparser');
 import Context from './middleware/Context'
 import RedisHelper from './util/RedisHelper';
-
-const con = new Context()
-
+;(async () => {
 const app = new Koa();
 const database = new Database()
-database.startConnection();
-const redisHelper = new RedisHelper()
-redisHelper.createClient()
+await database.startConnection();
+await RedisHelper.createClient()
 
 //设置跨域
 app.use(cors({
@@ -39,3 +36,4 @@ app.use(UserRouter.routes())
 app.listen(2222)
 
 console.log('🚀 app started at port 2222')
+})()

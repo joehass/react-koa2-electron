@@ -1,25 +1,33 @@
 //TODO: redis帮助类
 import redis from 'redis'
+import { resolve } from 'url';
 
-export default class RedisHelper {
+ class RedisHelper {
     
     client:any
 
-    createClient =() =>{
-        this.client = redis.createClient(6381,'127.0.0.1')
-        this.client.on('connect',()=>{
-            console.log('redis 连接成功')
+    createClient = () =>{
+        return new Promise(resolve=>{
+            this.client = redis.createClient(6381,'127.0.0.1',{password:'WEAVERemobile7*()'})
+        
+            this.client.on('ready',()=>{
+                console.log('redis 连接成功')
+                resolve()
+            })
         })
+        
     }
 
-    //保存键值
+    //TODO: 保存键值
     set = (key:string,value:any) => {
         this.client.set(key,value)
     }
     
-    //获取键值
+    //TODO: 获取键值
     get = (key) => {
         return this.client.get(key)
     }
 
 }
+
+export default new RedisHelper()

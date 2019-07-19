@@ -12,12 +12,16 @@ class LoginController {
     }
 
   // @bindContext(User)
-     register = async(ctx)=>{
+     register = async(ctx,next)=>{
         let data = ctx.request.body
-        let res
-        res = await this.userService.register(data)
-        
-        ctx.body = res
+        let body =  await this.userService.register(data)   
+        ctx.body = body
+    }
+
+    login = async(ctx)=>{
+        let data = ctx.request.body
+
+        let body = await this.userService.login(data)
     }
 }
 

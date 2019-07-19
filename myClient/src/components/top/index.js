@@ -8,15 +8,17 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import Button from "@material-ui/core/Button";
-import Login from "../login/Login";
-import Register from "../login/Register";
+import {Login} from "../login/Login";
+import {Register} from "../login/Register";
 import HttpUtil from "../../util/Http";
+import { LoginSuccess } from '../login/LoginSuccess';
 
 export default function Top(){
 
     const [open, setOpen] = useState(false)
     const [loginVisible, setLoginVisible] = useState(false)
     const [regisaterVisible, setRegisaterVisible] = useState(false)
+    const [loginSuccessVisible, setLoginSuccessVisible] = useState(false)
 
     function handleMenu(){
         setOpen(!open)
@@ -27,8 +29,6 @@ export default function Top(){
      };
 
      function loginShow (){
-        const httpUtil = new HttpUtil();
-        httpUtil.getRequest();
         setLoginVisible(!loginVisible)
     };
 
@@ -39,6 +39,15 @@ export default function Top(){
     function onRegisterClose(){
         setRegisaterVisible(!regisaterVisible)
         
+    }
+
+    function onLoginSuccessClose(){
+        setLoginSuccessVisible(!loginSuccessVisible)
+    }
+
+    function loginSuccess(){
+        setLoginVisible(!loginVisible)
+        setLoginSuccessVisible(!loginSuccessVisible)
     }
 
     function closeLogin(){
@@ -101,9 +110,11 @@ export default function Top(){
                     loginVisible ?
                         <Login
                             visibled={loginVisible}
-                            onClose = {closeLogin}
-                            onRister = {onRegister}
-                        />:null
+                            onClose ={closeLogin}
+                            onRister ={onRegister}
+                            loginSuccess = {loginSuccess}
+                        />
+                :null
                 }
                 {
                     regisaterVisible?
@@ -111,6 +122,13 @@ export default function Top(){
                             visibled={regisaterVisible}
                             onClose = {onRegisterClose}
                         />:null
+                }
+                {
+                    loginSuccessVisible?
+                    <LoginSuccess
+                        visibled={loginSuccessVisible}
+                        onClose = {onLoginSuccessClose}
+                    />:null
                 }
             </div>
         )
