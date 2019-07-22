@@ -1,95 +1,38 @@
 import React from "react";
 import { render } from "react-dom";
-import { types, getSnapshot,flow } from "mobx-state-tree";
-import { observer } from "mobx-react";
-import { values } from "mobx";
 
-let id = 1;
-const randomId = () => ++id;
-function getData(){ 
-          new Promise(resolve=>{
-            let data = {
-              id: id,
-              name: "Eat a cake",
-              done: true
-          }    
-            resolve()
-            return data
-          })
-}
+import { useReducer } from 'react';
 
-const Todo = types
-  .model({
-    id: types.identifierNumber,
-    name: types.optional(types.string, ""),
-    done: types.optional(types.boolean, false)
-  })
-  .actions(self => {
-    function setName(newName) {
-      self.name = newName;
-    }
-
-    function toggle() {
-      self.done = !self.done;
-    }
-
-    return { setName, toggle };
-  });
-
-const User = types.model({
-  name: types.optional(types.string, "")
-});
-
-const RootStore = types
-  .model({
-    users: types.map(User),
-    todos: types.optional(types.map(Todo), {})
-  })
-  .actions(self => {
-
-    function chang(id, todo,name){
-       
-    }
-    const addTodo = flow(function*(){
-      let data = getData()
-      let todo = yield Todo.create(data)
-      self.todos.set(id,todo);
-    })
-
-    return { addTodo,chang };
-  });
-
-const store = RootStore.create({
-  users: {},
-  todos: {
-    "1": {
-      id: id,
-      name: "Eat a cake",
-      done: true
-    }
+const initialState = 0;
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment': return state + 1;
+    case 'decrement': return state - 1;
+    case 'set': return action.count;
+    default: throw new Error('Unexpected action');
   }
-});
+};
 
-const App = observer(props => (
-  <div>
-    <button onClick={e => props.store.addTodo(randomId(), "New Task")}>
-      Add Task
-    </button>
-    {values(props.store.todos).map(todo => (
-      <div key={todo.id}>
-        <input
-          type="checkbox"
-          checked={todo.done}
-          onChange={e => todo.toggle()}
-        />
-        <input
-          type="text"
-          value={todo.name}
-          onChange={e => todo.setName(e.target.value)}
-        />
+const Example03 = () => {
+  const [count1, dispatch1] = useReducer(reducer, initialState);
+  const [count2, dispatch2] = useReducer(reducer, initialState);
+  return (
+    <>
+      <div>
+        {count1}
+        <button onClick={() => dispatch1({ type: 'increment' })}>+1</button>
+        <button onClick={() => dispatch1({ type: 'decrement' })}>-1</button>
+        <button onClick={() => dispatch1({ type: 'set', count: 0 })}>reset</button>
       </div>
-    ))}
-  </div>
-));
+      <div>
+        {count2}
+        <button onClick={() => dispatch2({ type: 'increment' })}>+1</button>
+        <button onClick={() => dispatch2({ type: 'decrement' })}>-1</button>
+        <button onClick={() => dispatch2({ type: 'set', count: 0 })}>reset</button>
+      </div>
+    </>
+  );
+};
 
-render(<App store={store} />, document.getElementById("root"));
+
+render(<Example03/>, document.getElementById("root"));

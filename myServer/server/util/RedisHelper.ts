@@ -19,13 +19,16 @@ import { resolve } from 'url';
     }
 
     //TODO: 保存键值
-    set = (key:string,value:any) => {
-        this.client.set(key,value)
+    set = (table:string,key:string,value:any) => {
+        this.client.set(table,key,value)
     }
     
     //TODO: 获取键值
-    get = (key) => {
-        return this.client.get(key)
+    get = (table:string,key:string) => {
+        let value = this.client.get(table,key,function(error, res){
+            return JSON.stringify(res)
+        })
+       
     }
 
 }

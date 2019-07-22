@@ -2,8 +2,15 @@ import {SUCCESS__MSG,FAUILD__MSG} from '../config/const'
 
 class DatabaseHelper{
 
+    //TODO: 查到多条数据
     find = async(model,value) =>{
-        const value1 = await model.find(value)
+        let value1 = await model.find(value)
+        return value1
+    }
+
+    //TODO: 查找单条数据
+    findOne = async(model,value)=>{
+        let value1 = await model.findOne(value)
         return value1
     }
 

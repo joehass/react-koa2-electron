@@ -1,7 +1,6 @@
 import { prop, Typegoose } from 'typegoose'
 import { ObjectId } from 'mongodb'
 
-
 class User extends Typegoose{
     readonly _id: ObjectId
     
@@ -21,7 +20,10 @@ class User extends Typegoose{
     userAccount?:string;//账号
 
     @prop()
-    userPassword?:string //密码
+    password?:string //密码
+
+    @prop()
+    salt?:string //盐
 
 }
 

@@ -12,6 +12,7 @@ import {Login} from "../login/Login";
 import {Register} from "../login/Register";
 import HttpUtil from "../../util/Http";
 import { LoginSuccess } from '../login/LoginSuccess';
+import {RegisterSuccess} from '../login/registerSuccess';
 
 export default function Top(){
 
@@ -19,6 +20,7 @@ export default function Top(){
     const [loginVisible, setLoginVisible] = useState(false)
     const [regisaterVisible, setRegisaterVisible] = useState(false)
     const [loginSuccessVisible, setLoginSuccessVisible] = useState(false)
+    const [registerSuccessVisible, setRegisterSuccessVisible] = useState(false)
 
     function handleMenu(){
         setOpen(!open)
@@ -53,6 +55,15 @@ export default function Top(){
     function closeLogin(){
         setLoginVisible(!loginVisible)
     };
+
+    function registerSuccess(){
+        setRegisterSuccessVisible(!registerSuccessVisible)
+        onRegisterClose()
+    }
+
+    function onRegisterSuccessClose(){
+        setRegisterSuccessVisible(!registerSuccessVisible)
+    }
 
         return (
             <div>
@@ -121,6 +132,7 @@ export default function Top(){
                         <Register
                             visibled={regisaterVisible}
                             onClose = {onRegisterClose}
+                            registerSuccess = {registerSuccess}
                         />:null
                 }
                 {
@@ -128,7 +140,16 @@ export default function Top(){
                     <LoginSuccess
                         visibled={loginSuccessVisible}
                         onClose = {onLoginSuccessClose}
+                        onFauilt = {loginSuccess}
                     />:null
+                }
+                {
+                    registerSuccessVisible?
+                    <RegisterSuccess
+                        visibled={registerSuccessVisible}
+                        onClose={onRegisterSuccessClose}
+                    />
+                    :null
                 }
             </div>
         )

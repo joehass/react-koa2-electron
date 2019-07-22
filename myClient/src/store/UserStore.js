@@ -1,14 +1,14 @@
 import { types ,flow} from "mobx-state-tree";
 
 const UserStore = types.model({
-    intimacy:types.optional(types.string,""),//亲密号
+    intimacy:types.optional(types.integer,0),//亲密号
     password:types.optional(types.string,""),//密码
     sex:types.optional(types.string,"1"),//性别
     userAccount:types.optional(types.string,""),//账号
     userName:types.optional(types.string,""),//昵称
 })
 .actions(self=>{
-    init (value){
+    function init (value){
         if (!!value.intimacy){
             self.intimacy = value.intimacy
         }

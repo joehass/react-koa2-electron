@@ -7,9 +7,6 @@ import {asyncComponent} from './AsyncComponent'
 
 import Main from '../components/main/index'
 import Login from "../components/login/Login";
-import { useContext } from "unstated-next"
-import useAppStore from '../store/index'
-import RegisterStore from '../store/registerStore'
 
 function AppRouter(props){
         return(

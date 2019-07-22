@@ -13,7 +13,7 @@ import { observer } from "mobx-react";
 
 export const Login = observer(function(props){
     const store = useStore("LoginStore");
-    const userStore = useStore("UserStore");
+    // const userStore = useStore("UserStore");
     const classes = formStyle();
     const {visibled,onClose,onRister,loginSuccess} = props;
     const [open,setOpen] = useState(visibled);
@@ -77,14 +77,14 @@ export const Login = observer(function(props){
 
     async function sub(value){
         value.preventDefault();//阻止表单提交
-        let intimacy = value.target.intimacy.value;
-        let password = value.target.password.value;
+        let intimacy = parseInt(value.target.intimacy.value)
+        let password = value.target.password.value
         let body = {
             intimacy:intimacy,
             password:password
         }
         await store.LoginAction(body)
-        userStore.init(body) //保存登录数据
+        // userStore.init(body) //保存登录数据
         afterLogin()
     }
 

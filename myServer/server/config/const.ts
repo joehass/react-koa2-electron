@@ -8,3 +8,5 @@ export const MONGO_HOST ="localhost"
 export const SUCCESS__MSG=1;
 //失败
 export const FAUILD__MSG=0;
+
+export const USER = 'user_table'

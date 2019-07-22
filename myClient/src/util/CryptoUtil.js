@@ -1,10 +1,21 @@
+let crypto = require('crypto')
+//生成加密密码
+export default function usePasswordEncode(psw,salt){
+    let md5 = crypto.createHash('md5');
 
-//TODO: 密码加密类
-export default class PasswordUtil{
+    md5.update(psw);
 
+    md5 = crypto.createHash('md5');
+    if(!salt){
+        salt = genRandomNum(24);
+    }
+    md5.update(psw + salt);
+    let encodePassword = md5.digest('hex');
 
-    //TODO: 生成加密的盐，或者生成token
-    public static genRandomNum(pwd_len:number){
+    return {salt,encodePassword}
+
+    //生成盐
+    function genRandomNum(pwd_len){
         let str = [
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
             'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
@@ -12,8 +23,8 @@ export default class PasswordUtil{
         ]
 
         let count = 0
-        let i :number
-        let pwd:string
+        let i
+        let pwd
         while(count < pwd_len){
             i = Math.round(Math.abs(Math.random()*36))
 
@@ -30,5 +41,5 @@ export default class PasswordUtil{
 
         return pwd
     }
-
 }
+

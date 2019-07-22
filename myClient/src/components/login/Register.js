@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Typography from "@material-ui/core/Typography";
-import Dialog from "../common/Dialog";
+import Dialog from "../common/Modal";
 import formStyle from "../common/style";
 import {PersonAdd,Lock} from "@material-ui/icons";
 import Grid from "@material-ui/core/Grid";
@@ -15,8 +15,8 @@ import { observer } from "mobx-react";
 
 
 export const Register =  observer(function(props){
-    const store = useStore("RegisterStore");
-    const {visibled,onClose} = props;
+    const store = useStore("LoginStore");
+    const {visibled,onClose,registerSuccess} = props;
     const [open,setOpen] = useState(visibled);
     const [value, setValue] = React.useState(1);
 
@@ -138,10 +138,11 @@ export const Register =  observer(function(props){
         }
 
         await registerAction(values)
+        registerAfter()
     }
 
     //TODO: 注册之后逻辑
     function registerAfter(){
-        const {register} = store
+        registerSuccess()
     }
 })

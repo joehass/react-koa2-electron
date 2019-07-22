@@ -12,7 +12,7 @@ class LoginController {
     }
 
   // @bindContext(User)
-     register = async(ctx,next)=>{
+     register = async(ctx)=>{
         let data = ctx.request.body
         let body =  await this.userService.register(data)   
         ctx.body = body
@@ -22,6 +22,15 @@ class LoginController {
         let data = ctx.request.body
 
         let body = await this.userService.login(data)
+        ctx.body = body
+    }
+
+    //TODO: 从数据库获取salt
+    getSalt = async(ctx)=>{
+        let data = ctx.request.body
+
+        let body = await this.userService.getSalt(data)
+        ctx.body = body
     }
 }
 

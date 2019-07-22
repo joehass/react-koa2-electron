@@ -22,5 +22,6 @@ router.get('/login',(ctx)=>{
 
 router.post('/register',LoginController.register)
 router.post('/login',LoginController.login)
+router.post('/getSalt',LoginController.getSalt)
 
 export default router
