@@ -3,19 +3,21 @@ import {useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
-import {Settings,PersonAdd, Close,CropDin,Remove} from '@material-ui/icons';
+import {Settings,PersonAdd, Close,CropDin,Remove,Person} from '@material-ui/icons';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Avatar from '@material-ui/core/Avatar';
 import Button from "@material-ui/core/Button";
 import {Login} from "../login/Login";
 import {Register} from "../login/Register";
-import HttpUtil from "../../util/Http";
 import { LoginSuccess } from '../login/LoginSuccess';
 import {RegisterSuccess} from '../login/registerSuccess';
+import {useStore} from '../../index'
+import {LoginUserInfo} from '../login/LoginUserInfo'
 
 export default function Top(){
 
+    const store = useStore("LoginStore")
     const [open, setOpen] = useState(false)
     const [loginVisible, setLoginVisible] = useState(false)
     const [regisaterVisible, setRegisaterVisible] = useState(false)
@@ -70,7 +72,10 @@ export default function Top(){
                 <AppBar position="static">
                     {/*toolbar 子元素同行显示*/}
                     <Toolbar>
+                    {store.token === ""?
                         <Button color="inherit" onClick={loginShow} className="login-button">点击登录</Button>
+                        :<LoginUserInfo/>
+                    }
                         <IconButton
                             //aria-label="Account of current user"
                             aria-controls="menu-appbar"

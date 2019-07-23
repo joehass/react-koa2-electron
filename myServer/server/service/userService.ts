@@ -22,22 +22,20 @@ export class UserService {
         let r = new R()
         if (!!user.intimacy) {
             //先从缓存中获取数据
-            u = RedisHelper.get(USER, user.intimacy)
+            u = await RedisHelper.get(user.intimacy)
             if (!!u) { //缓存中有数据,则取缓存中数据
                 let result = this.verifyPassword(user.password,u.User.password)
                 if (result === 0){
                     code = r.error('用户名或密码错误')
                 }else{
-                    if (!u.token) { //判断是否有token,如果没有token,则重新生成token
-                        let token = this.generatorToken();
-                        let User = {
-                            Token: token,
-                            User: u
-                        }
-                        //将用户数据缓存起来
-                        RedisHelper.set(USER, u.intimacy, User)
-                        code = r.data(User)
+                    let token = this.generatorToken();//重新生成token
+                    let User = {
+                        Token: token,
+                        User: u.User
                     }
+                    //将用户数据缓存起来
+                    RedisHelper.set(u.User.intimacy, User)
+                    code = r.data(User)
                 }
             } else { //从数据库读取数据
                 let where = {
@@ -56,10 +54,10 @@ export class UserService {
                         let token = this.generatorToken();
                         let User = {
                             Token: token,
-                            User: u
+                            User: u.toObject()
                         }
                         //将用户数据缓存起来
-                        RedisHelper.set(USER, u.intimacy, User) //缓存，下次从redis中取
+                        RedisHelper.set( u.intimacy, User) //缓存，下次从redis中取
                         code = r.data(User)
                     }
 
@@ -88,7 +86,7 @@ export class UserService {
                 Token: token,
                 User: u
             }
-            RedisHelper.set(USER, Intimacy + '', User) //缓存，下次从redis中取
+            RedisHelper.set(Intimacy + '', User) //缓存，下次从redis中取
             code = r.data(User)
         } else {
             code = r.data('')
@@ -104,9 +102,9 @@ export class UserService {
         let r = new R()
         if (!!intimacy) {
             //先从缓存中获取
-            u = RedisHelper.get(USER, intimacy)
+            u = await RedisHelper.get(intimacy)
             if (!!u) {
-                code = r.data(u.salt)
+                code = r.data(u.User.salt)
             } else { //从数据库获取
                 let where = {
                     'intimacy': user.intimacy

@@ -6,7 +6,6 @@ import {UserRouter} from './router/index'
 const router = require('koa-router')()
 import cors from 'koa2-cors'
 var bodyParser = require('koa-bodyparser');
-import Context from './middleware/Context'
 import RedisHelper from './util/RedisHelper';
 ;(async () => {
 const app = new Koa();

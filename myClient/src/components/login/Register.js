@@ -101,7 +101,7 @@ export const Register =  observer(function(props){
                                     </Grid>
                                 </RadioGroup>
                         </Grid>
-
+  
                     </div>
 
                     <Button variant="contained" type="submit" color="primary" className={classes.button}>
