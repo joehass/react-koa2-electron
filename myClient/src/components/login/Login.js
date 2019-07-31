@@ -71,7 +71,6 @@ export const Login = observer(function(props){
 
     function closeLogin(){
         setOpen(!open);
-        console.log(open);
         onClose()
     }
 

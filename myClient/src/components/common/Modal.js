@@ -20,7 +20,7 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: 400,
+        minWidth: 400,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(4),
@@ -33,7 +33,7 @@ export default (props)=>{
     const [open, setOpen] = React.useState(visibled);
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
-
+    const {width} = props
     //相当于componentDidMount，componentDidUpdate 和 componentWillUnmount 这三个函数的组合
     useEffect(() => {
         // Update the document title using the browser API

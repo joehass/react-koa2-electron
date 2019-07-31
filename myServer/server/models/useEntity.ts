@@ -1,7 +1,7 @@
-import { prop, Typegoose } from 'typegoose'
+import { prop, Typegoose, arrayProp, Ref } from 'typegoose'
 import { ObjectId } from 'mongodb'
 
-class User extends Typegoose{
+export class User extends Typegoose{
     readonly _id: ObjectId
     
     @prop({required:true}) // 标识mongosse

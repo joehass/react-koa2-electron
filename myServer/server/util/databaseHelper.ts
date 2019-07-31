@@ -2,10 +2,16 @@ import {SUCCESS__MSG,FAUILD__MSG} from '../config/const'
 
 class DatabaseHelper{
 
-    //TODO: 查到多条数据
+    //TODO: 查到多条数据,条件查询
     find = async(model,value) =>{
         let value1 = await model.find(value)
         return value1
+    }
+
+    //TODO: 查询全部数据
+    findAll = async(model) =>{
+        let value = await model.find()
+        return value
     }
 
     //TODO: 查找单条数据

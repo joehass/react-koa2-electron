@@ -13,8 +13,10 @@ const LoginStore = types.model({
     const LoginAction = flow(function *(value){
 
         const uri1 = './getSalt'
-
-        let res1 = yield httpUtil.postRequest(uri1,value)
+        let value1 = {
+            intimacy:value.intimacy
+        }
+        let res1 = yield httpUtil.postRequest(uri1,value1)
         if (res1.success === 1){
             let salt = res1.data //获取盐
             //密码加密
@@ -26,7 +28,7 @@ const LoginStore = types.model({
             if (res.success === 1){//登录成功
                 let u = User.create(res.data.User)
                 self.user = u
-                self.token = res.data.Token
+                self.token = res.data.token
             }else{//登录失败，保存登录数据
                 let u = User.create(value)
                 self.user = u
@@ -43,7 +45,7 @@ const LoginStore = types.model({
         if (res.success === 1){//注册成功
             let u = User.create(res.data.User)
             self.user = u
-            self.token = res.data.Token
+            self.token = res.data.token
         }
     })
 

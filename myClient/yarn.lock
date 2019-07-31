@@ -7295,6 +7295,14 @@ react-dom@^16.8.6:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
+react-draggable@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/react-draggable/download/react-draggable-3.3.0.tgz#2ed7ea3f92e7d742d747f9e6324860606cd4d997"
+  integrity sha1-LtfqP5Ln10LXR/nmMkhgYGzU2Zc=
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+
 react-event-listener@^0.6.6:
   version "0.6.6"
   resolved "https://registry.npm.taobao.org/react-event-listener/download/react-event-listener-0.6.6.tgz#758f7b991cad9086dd39fd29fad72127e1d8962a"

@@ -10,3 +10,7 @@ export const SUCCESS__MSG=1;
 export const FAUILD__MSG=0;
 
 export const USER = 'user_table'
+
+export const SESSION ='session'
+
+export const FRIENDS = 'friend'

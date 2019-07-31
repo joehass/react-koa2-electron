@@ -1,27 +1,27 @@
 
-import {UserService} from '../../service/userService'
+import {LoginService} from '../../service/LoginService'
 import User  from '../../models/useEntity';
 import { bindContext } from '../../decorator/decorator';
 
 class LoginController {
     
-    private readonly userService:UserService
+    private readonly loginService:LoginService
 
     constructor(){
-        this.userService = new UserService()
+        this.loginService = new LoginService()
     }
 
   // @bindContext(User)
      register = async(ctx)=>{
         let data = ctx.request.body
-        let body =  await this.userService.register(data)   
+        let body =  await this.loginService.register(data)   
         ctx.body = body
     }
 
     login = async(ctx)=>{
         let data = ctx.request.body
 
-        let body = await this.userService.login(data)
+        let body = await this.loginService.login(data)
         ctx.body = body
     }
 
@@ -29,7 +29,7 @@ class LoginController {
     getSalt = async(ctx)=>{
         let data = ctx.request.body
 
-        let body = await this.userService.getSalt(data)
+        let body = await this.loginService.getSalt(data)
         ctx.body = body
     }
 }
