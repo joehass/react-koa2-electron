@@ -114,6 +114,7 @@ export default class UserService {
         } else {
             this.code = this.r.error('添加好友失败，请再试一次')
         }
+        return this.code
     }
 
     //根据用户id获取人员信息，并增加在线信息

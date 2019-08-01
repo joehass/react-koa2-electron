@@ -19,7 +19,7 @@ class UserController {
     addFriend = async(ctx) =>{
         let data = ctx.request.body
 
-        let body = this.userService.addFriend(data)
+        let body = await this.userService.addFriend(data)
 
         ctx.body = body
     }

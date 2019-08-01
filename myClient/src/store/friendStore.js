@@ -19,9 +19,11 @@ const FriendStore = types.model({
     }) 
     //value:userid,friendid
     const addFriend = flow(function*(value){
-        const uri = '/addFriends'
+        const uri = '/addFriend'
         let res = yield httpUtil.postRequest(uri,value)
-        
+        if (res.success === 1){
+            console.log(res)
+        }
     })
 
     //好友推荐

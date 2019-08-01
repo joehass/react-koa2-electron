@@ -41,7 +41,7 @@ export default function DraggableDialog(props) {
                 onClose={handleClose}
                 PaperComponent={PaperComponent}
                 aria-labelledby="draggable-dialog-title"
-                maxWidth={'xl'}
+                // maxWidth={'xl'}
                 fullWidth={true}
             >
                 <DialogContent classes = {classes.content}>

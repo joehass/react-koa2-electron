@@ -9,6 +9,14 @@ const FriendListReducer = (state = initialState,action)=>{
             return Object.assign({},state,{
                 open:!open
             })
+        case 'addFriendSuccess'://添加好友成功
+            return Object.assign({},state,{
+                fridendSuccess:true
+            })
+        case 'onCloseAddFriendSuccess'://添加好友成功
+            return Object.assign({},state,{
+                fridendSuccess:false
+            })
         default:
             throw new Error('Unexpected action');
     }
