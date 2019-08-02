@@ -14,7 +14,7 @@ import { LoginSuccess } from '../login/LoginSuccess';
 import {RegisterSuccess} from '../login/registerSuccess';
 import {useStore} from '../../index'
 import {LoginUserInfo} from '../login/LoginUserInfo'
-import { FriendList } from '../main/FriendList';
+import { FriendRecommod } from '../main/FriendRecommod';
 import { LoginTip } from '../login/loginTip';
 
 export default function Top(){
@@ -198,7 +198,7 @@ export default function Top(){
                 }
                 {
                     friendlistVisible?
-                    <FriendList
+                    <FriendRecommod
                         visibled={friendlistVisible}
                         onClose = {friendlistVisibleClose}
                     />:null
