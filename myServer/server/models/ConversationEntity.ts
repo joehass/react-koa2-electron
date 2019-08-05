@@ -21,13 +21,13 @@ class Conversation extends Typegoose{
     unreadcnt?:number //未读数
 
     @prop({default:0})
-    istop?:string //是否置顶,1:置顶 0:
+    istop?:number //是否置顶,1:置顶 0:
 
     @prop()
     lasttime?:string //最后更新时间
 
     @prop({required:true})
-    senderid!: number //发送人员id
+    senderid!: string //发送人员id
 
     @prop()
     msgcontent?:string //消息内容

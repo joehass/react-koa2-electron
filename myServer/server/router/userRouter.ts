@@ -34,5 +34,6 @@ router.post('/getUnFriends',UserController.getUnFriends)//好友推荐
 
 //TODO: 会话相关路由
 router.post('/syncConver',ConversationController.syncConvers)//同步会话到数据库
+router.post('/getAllConver',ConversationController.getAllConversation)//获取所有会话
 
 export default router

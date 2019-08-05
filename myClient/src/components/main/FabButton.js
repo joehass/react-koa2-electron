@@ -3,17 +3,16 @@ import { observer } from "mobx-react-lite";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
-import {useStore, useMyReducer} from '../../index'
+import {useMyReducer} from '../../index'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import {Chat} from '@material-ui/icons/';
 import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Zoom from '@material-ui/core/Zoom';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -54,7 +53,7 @@ export const FabButton = observer(function(){
             <Grid item xs={1} zeroMinWidth> 
                 <Grow in={checked}>
                     <List>
-                        <ListItem button onClick={}>
+                        <ListItem button>
                             <ListItemAvatar>
                                 <Avatar>
                                     <Chat/>
@@ -64,19 +63,18 @@ export const FabButton = observer(function(){
                     </List>
                 </Grow>
                 <ClickAwayListener onClickAway={mouseOver}>
-                <Zoom
-                    key={fab.color}
+                {/* <Zoom
                     in={value === index}
                     timeout={transitionDuration}
                     style={{
                         transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
                     }}
                     unmountOnExit
-                >
+                > */}
                     <Fab color="primary" onClick={mouseOver} aria-label="add" className={classes.button}>
-                        <AddIcon />
+                        <AddIcon/>
                     </Fab>
-                    </Zoom>
+                    {/* </Zoom> */}
                 </ClickAwayListener>
             </Grid>
         </div>
