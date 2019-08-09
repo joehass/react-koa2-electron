@@ -11,8 +11,10 @@ module.exports={
     // 构建出用于 Electron 渲染进程用的 JavaScript 代码，也就是这2个窗口需要的代码
     target: 'electron-renderer',
     output:{
-        filename:'bundle.[hash:8].js',
-        path:path.resolve(__dirname,'build')
+        filename:'bundle.js',
+        path:path.resolve(__dirname,'build'),
+        hotUpdateChunkFilename: 'hot/hot-update.js',
+        hotUpdateMainFilename: 'hot/hot-update.json'
     },
 
     plugins:[
@@ -25,7 +27,7 @@ module.exports={
             }
         }),
         new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: ['./build'] //在编译之前删除文件
+            // cleanOnceBeforeBuildPatterns: ['./build'] //在编译之前删除文件
         }),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
@@ -105,6 +107,7 @@ module.exports={
                 include:path.resolve(__dirname,'src'),//需要包含的目录
             }
         ]
+        
     },
 
     resolve:{

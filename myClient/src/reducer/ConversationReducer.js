@@ -1,10 +1,12 @@
-const FabReducer = (state = initialState,action)=>{
+const ConversationReducer = (state = initialState,action)=>{
     switch (action.type){
         case 'getConvers': //获取所有会话
             return Object.assign({},state,{
-                fabOpen:!state.fabOpen
+                convers:state.convers
             })
         default:
-            throw new Error('Unexpected action');
+           return state
     }
 }
+
+export default ConversationReducer

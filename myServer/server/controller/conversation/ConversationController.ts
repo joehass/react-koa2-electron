@@ -15,8 +15,8 @@ class ConversationController {
 
     //TODO: 获取所有会话
     getAllConversation = async(ctx) =>{
-        let userid = ctx.body
-        let code = await this.conversationService.getAllConversation(userid)
+        let data = ctx.request.body
+        let code = await this.conversationService.getAllConversation(data.userid)
         ctx.body = code
     }
 }

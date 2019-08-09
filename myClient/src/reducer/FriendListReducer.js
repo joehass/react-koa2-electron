@@ -17,8 +17,19 @@ const FriendListReducer = (state = initialState,action)=>{
             return Object.assign({},state,{
                 fridendSuccess:false
             })
+        case 'friendListLength':{
+            return Object.assign({},state,{
+                friendListLength:action.friendListLength
+            })
+        }
+        case 'showUserinfo':{//显示人员卡片
+            return Object.assign({},state,{
+                showUserinfo:true,
+                targetInfo:action.targetInfo
+            })
+        }
         default:
-            throw new Error('Unexpected action');
+            return state
     }
 }
 

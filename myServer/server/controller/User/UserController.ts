@@ -9,8 +9,8 @@ class UserController {
 
     //TODO: 获取用户全部好友
     getAllFriends = async(ctx) =>{
-        let data = ctx.request.body
-        let body = this.userService.getAllFriends(data)
+        let data = ctx.request.body.userid
+        let body = await this.userService.getAllFriends(data)
         ctx.body = body
 
     }

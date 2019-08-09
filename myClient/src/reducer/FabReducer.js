@@ -5,7 +5,7 @@ const FabReducer = (state = initialState,action)=>{
                 fabOpen:!state.fabOpen
             })
         default:
-            throw new Error('Unexpected action');
+            return state
     }
 }
         

@@ -8,13 +8,29 @@ const httpUtil = new HttpUtil;
 const FriendStore = types.model({
     friend:types.optional(types.array(LoginStore),[]), //好友
 }).actions(self=>{
+    /**
+     * value: userid
+     */
     const getAllFriend = flow(function*(value){
+        self.friend.length = 0
         const uri = '/getAllFriends'
-
+        let body = {
+            userid:value
+        }
         //这里接收userid
-        let res = yield httpUtil.postRequest(uri,value)
+        let res = yield httpUtil.postRequest(uri,body)
         if (res.success === 1){
-            console.log(res.data)
+            let friends = res.data
+            if (friends.length > 0){
+               for (let friend of friends){
+                   let u = UserStore.create(friend.User)
+                   let login = LoginStore.create({
+                        user:u,
+                        token:friend.token
+                    })
+                   self.friend.push(login)
+               }
+           }
         }
     }) 
     //value:userid,friendid

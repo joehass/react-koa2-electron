@@ -4,8 +4,12 @@ const MainReducer = (state = initialState,action)=>{
             return Object.assign({},state,{
                 open:!open
             })
+        case 'chat'://打开或关闭聊天面板
+            return Object.assign({},state,{
+                chatOpen:!state.chatOpen
+            })
         default:
-            throw new Error('Unexpected action');
+            return state
     }
 }
         

@@ -16,9 +16,21 @@ import {useStore} from '../../index'
 import {LoginUserInfo} from '../login/LoginUserInfo'
 import { FriendRecommod } from '../main/FriendRecommod';
 import { LoginTip } from '../login/loginTip';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import clsx from 'clsx';
+   
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+      },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    }
+}))
 
-export default function Top(){
-
+export default function Top(props){
+    const classes = useStyles();
+    const {showChat} = props
     const store = useStore("LoginStore")
     const friendStore = useStore("FriendStore")
     const [open, setOpen] = useState(false)
@@ -57,6 +69,7 @@ export default function Top(){
     function loginSuccess(){
         setLoginVisible(!loginVisible)
         setLoginSuccessVisible(!loginSuccessVisible)
+        showChat()
     }
 
     function closeLogin(){
@@ -107,8 +120,9 @@ export default function Top(){
     // }, [loginStore.user.intimacy])
 
         return (
-            <div>
-                <AppBar position="static">
+            <div className={classes.root}>
+                <AppBar position="fixed" className={classes.appBar}
+                >
                     {/*toolbar 子元素同行显示*/}
                     <Toolbar>
                     {store.token === ""?

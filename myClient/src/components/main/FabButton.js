@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
-import {useMyReducer} from '../../index'
+import {useMyReducer,useStore} from '../../index'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {Chat} from '@material-ui/icons/';
@@ -47,13 +47,23 @@ export const FabButton = observer(function(){
     const [state, dispatch] = useReducer(FabReducer,initialState)
     const classes = useStyles();
     const [checked, setChecked] = useState(false);
+    const conversationStore = useStore("ConversationStore")
+    const loginStore = useStore("LoginStore")
+    const conversationReducer = useMyReducer("ConversationReducer")
+
+    async function refreshConver(){
+        if(!!loginStore.user){
+            let userid = loginStore.user.intimacy
+            await conversationStore.getAllConversation(userid)
+        }
+    }
 
     return (
         <div className={classes.root}>
             <Grid item xs={1} zeroMinWidth> 
                 <Grow in={checked}>
                     <List>
-                        <ListItem button>
+                        <ListItem button onClick={refreshConver}>
                             <ListItemAvatar>
                                 <Avatar>
                                     <Chat/>
@@ -62,7 +72,7 @@ export const FabButton = observer(function(){
                         </ListItem>
                     </List>
                 </Grow>
-                <ClickAwayListener onClickAway={mouseOver}>
+                <ClickAwayListener onClickAway={clickAway}>
                 {/* <Zoom
                     in={value === index}
                     timeout={transitionDuration}
@@ -81,6 +91,11 @@ export const FabButton = observer(function(){
     )
     function mouseOver(){
         setChecked(prev => !prev);
+        // dispatch({type:'fabOpen'})
+    }
+
+    function clickAway(){
+        setChecked(prev => false);
         // dispatch({type:'fabOpen'})
     }
 })

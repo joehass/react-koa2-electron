@@ -12,6 +12,7 @@ import {
 } from './../config/const';
 import SessionEntity from '../models/SessionEntity';
 import User from '../models/useEntity'
+import FriendEntity from '../models/FriendEntity';
 
 export default class UserService {
 
@@ -62,41 +63,35 @@ export default class UserService {
         //先从缓存中获取好友信息
         //let friends:any[] = new Array()
         let friends = await RedisHelper.sgetAll("friends" + userid)
-        let friendsInfoOnline: any[] = new Array()
-        let friendsInfoOffline: any[] = new Array()
+        let friendsArray = new Array()
         //获取好友详细信息
         if (Array.isArray(friends)) {
-            friends.forEach(async (item) => {
-                //从缓存中获取用户信息
-                let u: any
-                u = await RedisHelper.get(USER, item)
-                if (!!u) { //如果缓存中有数据
-                    //判断用户是否在线
-                    let uOnline = await RedisHelper.get(SESSION, u.intimacy)
-                    if (!!uOnline) { //用户在线
-                        friendsInfoOnline.push(uOnline)
-                    } else { //用户不在线
-                        let session = new SessionEntity("", u)
-                        friendsInfoOffline.push(session)
-                    }
-                } else { //如果缓存中没有数据，从数据库获取用户数据
-                    u = await databaseHelper.findOne(User, u.intimacy)
-                    //判断用户是否在线
-                    let uOnline = await RedisHelper.get(SESSION, u.intimacy)
-                    if (!!uOnline) { //用户在线
-                        friendsInfoOnline.push(uOnline)
-                    } else { //用户不在线
-                        let session = new SessionEntity("", u)
-                        friendsInfoOffline.push(session)
-                    }
+            if(friends.length === 0){//缓存中不存在好友，则从数据库中取好友信息
+                let where = {
+                    userid:userid
                 }
-            })
+                friends = await databaseHelper.find(FriendEntity,where) 
+            }
+            if (Array.isArray(friends)){
+                for (let friend of friends){
+                    RedisHelper.sadd("friends" + userid, friend.friendid)
+                    //从缓存中获取用户信息
+                    let u: any
+                    u = await RedisHelper.get(USER, friend.friendid)
+                    if (!u) {//如果缓存中没有数据，从数据库获取用户数据
+                        let where = {
+                            userid:friend.friendid
+                        }
+                        //判断用户是否在线
+                        u = await databaseHelper.findOne(User, where)
+                    }
+                    let userInfo = await this.getUser(u.intimacy) //判断用户是否在线
+                    friendsArray.push(userInfo)
+                }
+            }        
         }
-        let info = {
-            'online': friendsInfoOnline,
-            'offline': friendsInfoOffline,
-        }
-        this.code = this.r.data(info)
+        this.code = this.r.data(friendsArray)
+        return this.code
     }
 
     //TODO: 添加好友
